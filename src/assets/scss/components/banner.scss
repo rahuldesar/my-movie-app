@@ -1,5 +1,3 @@
-/* stylelint-disable    function-parentheses-space-inside*/
-
 @import "../abstracts";
 
 .banner-image-wrapper {
@@ -21,6 +19,7 @@
   @include min-break-point(larger-desktop) {
     height: 30.75rem;
   }
+
   // * ==== gradient overlay over banner image ===
   .dark-overlay {
     background: linear-gradient(to top, $dark-opaque-overlay, $transparent);
@@ -38,24 +37,16 @@
     }
   }
 
-  // TODO - update this, if needed, later while checking with other images (data from api)
   // * ==== better positioning of banner image =====
   .banner-image {
     object-fit: cover;
 
-    // @include min-break-point(mobile-phone) {
-    //   transform: translate(4rem, 5rem) scale(2);
-    // }
-    // @include min-break-point(tablet-landscape) {
-    //   transform: translate(4.5rem, 0) scale(1.5);
-    // }
     @include min-break-point(larger-desktop) {
       transform: translate(0, -7%);
     }
   }
 
-  // ! Position class is here to change after mobile view
-  // ? couldn't find anything that will act like 'position-sm-relative'
+  // * ==== better positioning of movie details =====
   .movie-details {
     color: $grey-100;
     position: absolute;
