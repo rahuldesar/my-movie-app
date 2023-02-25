@@ -1,14 +1,37 @@
 @import "../abstracts";
-
-.navbar-wrapper {
-  z-index: 22;
-}
-
 .navbar-menu-items {
   @include min-break-point(tablet-landscape) {
     margin-left: 8rem;
   }
   @include min-break-point(larger-desktop) {
     margin-left: 14rem;
+  }
+}
+
+.header-searchbox {
+  width: 10.5rem;
+
+  @include min-break-point(tablet) {
+    width: 15rem;
+  }
+}
+.navbar-toggler {
+  .navbar-toggler-icon {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}
+
+.navbar-brand {
+  font-size: 1rem;
+  @include min-break-point(tablet) {
+    font-size: 1.25rem;
+  }
+}
+
+.nav-link {
+  font-size: 0.85rem;
+  @include min-break-point(tablet) {
+    font-size: 1rem;
   }
 }
