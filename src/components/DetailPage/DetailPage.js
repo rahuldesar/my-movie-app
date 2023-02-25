@@ -6,7 +6,6 @@ import MovieCreditAPI from "api/MovieCreditAPI/MovieCreditAPI";
 import MovieDetailAPI from "api/MovieDetailsAPI/MovieDetailsAPI";
 
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import VideoPlayer from "components/VideoPlayer/VideoPlayer";
 
 const DetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
   const getDirector = () => {
@@ -33,7 +32,14 @@ const DetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
   return (
     <div className="text-light pt-5 ">
       <div className="mt-4 mx-sm-5 bg-dark">
-        <VideoPlayer />
+        <iframe
+          src="https://www.2embed.to/embed/imdb/tv?id=tt3581920&s=1&e=1"
+          frameborder="0"
+          width="100%"
+          height="500px"
+          allowFullScreen="true"
+        ></iframe>
+        {/* <VideoPlayer /> */}
       </div>
       <div className="w-75 m-auto pt-3 pb-5">
         <h4 className="mt-2 text-primary"> {currentMovieDetail.title} </h4>

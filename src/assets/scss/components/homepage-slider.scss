@@ -4,8 +4,6 @@
 .slider-wrapper {
   @include min-break-point(tablet-landscape) {
     bottom: 1rem;
-    position: absolute;
-    z-index: 30;
   }
 
   // ! hover interaction of single card
