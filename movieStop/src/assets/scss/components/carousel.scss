@@ -1,0 +1,53 @@
+@import "../abstracts";
+
+.carousel-content-wrapper {
+  // ! Positioning CSS for next and prev button
+  .prev-btn {
+    @include translate-Y(-50%);
+    left: 1%;
+    top: 50%;
+    z-index: 20;
+  }
+
+  .next-btn {
+    @include translate-Y(-50%);
+    right: 1%;
+    top: 50%;
+    z-index: 20;
+  }
+
+  .carousel-content {
+    transition: all 250ms ease-in-out;
+  }
+
+  // ! This cannot be replaced by flex-grow-1 + flex-shrink-0, this is updating css of bootstrap card
+  .carousel-content > * {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
+
+  // ! THESE classes are assigned dynamically based on screensize, so we cannot hardcode "w-100 | w-50" for these
+  .carousel-content.card-visible-1 > * {
+    width: 100%;
+  }
+
+  .carousel-content.card-visible-2 > * {
+    width: 50%;
+  }
+
+  .carousel-content.card-visible-3 > * {
+    width: calc(100% / 3);
+  }
+
+  .carousel-content.card-visible-4 > * {
+    width: calc(100% / 4);
+  }
+
+  .carousel-content.card-visible-6 > * {
+    width: calc(100% / 6);
+  }
+
+  .carousel-content.card-visible-8 > * {
+    width: calc(100% / 8);
+  }
+}

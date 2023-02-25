@@ -1,0 +1,14 @@
+@import "../abstracts";
+
+.navbar-wrapper {
+  z-index: 22;
+}
+
+.navbar-menu-items {
+  @include min-break-point(tablet-landscape) {
+    margin-left: 8rem;
+  }
+  @include min-break-point(larger-desktop) {
+    margin-left: 14rem;
+  }
+}

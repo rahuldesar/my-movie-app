@@ -1,0 +1,18 @@
+@import "../abstracts";
+
+.movie-card-wrapper {
+  width: 50%;
+  @include min-break-point(mobile-phone) {
+    width: 30%;
+  }
+
+  @include min-break-point(tablet-landscape) {
+    width: 20%;
+  }
+
+  .movie-card {
+    .card-year {
+      color: $grey-500;
+    }
+  }
+}

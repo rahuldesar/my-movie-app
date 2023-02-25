@@ -1,0 +1,18 @@
+@import "../abstracts";
+
+.card-main {
+  color: $grey-400;
+  font-family: $roboto-condensed-font-family;
+
+  .card-title {
+    @include min-break-point(tablet-landscape) {
+      font-size: 0.7rem;
+    }
+  }
+}
+
+.active {
+  .card-title {
+    color: $grey-100;
+  }
+}

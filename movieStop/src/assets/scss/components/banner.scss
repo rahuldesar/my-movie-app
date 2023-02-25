@@ -1,0 +1,103 @@
+/* stylelint-disable    function-parentheses-space-inside*/
+
+@import "../abstracts";
+
+.banner-image-wrapper {
+  height: 20rem;
+
+  @include min-break-point(mobile-phone) {
+    height: 100%;
+  }
+}
+
+.banner-wrapper {
+  height: auto;
+
+  @include min-break-point(mobile-phone) {
+    height: 32rem;
+  }
+
+  @include min-break-point(tablet-landscape) {
+    height: 35.75rem;
+  }
+  @include min-break-point(larger-desktop) {
+    height: 43.75rem;
+  }
+  // * ==== gradient overlay over banner image ===
+  .dark-overlay {
+    background: linear-gradient(to top, $dark-opaque-overlay, $transparent);
+    bottom: 0;
+    left: 0;
+    right: 0%;
+    top: 0%;
+    z-index: 5;
+
+    @include min-break-point(tablet-landscape) {
+      background: linear-gradient(
+        90deg,
+        $dark-opaque-overlay 36%,
+        $transparent 75%,
+        $dark-opaque-overlay 100%
+      );
+    }
+  }
+
+  // TODO - update this, if needed, later while checking with other images (data from api)
+  // * ==== better positioning of banner image =====
+  .banner-image {
+    object-fit: cover;
+    transform: translate(0, 7rem) scale(2.5);
+
+    @include min-break-point(mobile-phone) {
+      transform: translate(4rem, 5rem) scale(2);
+    }
+    @include min-break-point(tablet-landscape) {
+      transform: translate(4.5rem, 0) scale(1.5);
+    }
+    @include min-break-point(larger-desktop) {
+      transform: translate(6rem, -1rem) scale(1.2);
+    }
+  }
+
+  // ! Position class is here to change after mobile view
+  // ? couldn't find anything that will act like 'position-sm-relative'
+  .movie-details {
+    color: $grey-100;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%);
+    z-index: 10;
+
+    @include min-break-point(mobile-phone) {
+      bottom: 40%;
+      font-size: 0.6rem;
+      left: 5%;
+      position: absolute;
+      transform: translate(0, 50%);
+      width: 46%;
+    }
+
+    @include min-break-point(tablet-landscape) {
+      bottom: 65%;
+      font-size: 0.8rem;
+    }
+    @include min-break-point(larger-desktop) {
+      bottom: 62%;
+      font-size: 0.9rem;
+      left: 7%;
+      width: 30%;
+    }
+  }
+
+  .genre-items li::before {
+    content: "|";
+    // ! For reviewer: Mention method to use padding in pseudo element using bootstrap.
+    padding: 0 0.75rem;
+  }
+
+  .genre-items li:first-child::before {
+    content: "";
+    // ! this resets padding written above
+    padding: 0;
+  }
+}
