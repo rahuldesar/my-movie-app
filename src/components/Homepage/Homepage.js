@@ -1,4 +1,6 @@
 import { useContext, useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
 
 import MovieDetailAPI from "api/MovieDetailsAPI/MovieDetailsAPI";
 
@@ -32,17 +34,57 @@ const Homepage = () => {
     }
   }, [selectedMovie]);
 
-  // * Updates banner with movieId: id
-  function updateBanner(id) {
-    setSelectedMovie(id);
-  }
-
   if (!isLoading) {
     return (
       <div>
         <div className="homepage-wrapper position-relative w-100">
-          <Banner bannerMovie={bannerMovie} />
-          <HomepageSlider movieList={movieData} updateBanner={updateBanner} />
+          <Swiper
+            slidesPerView={1}
+            autoplay={{
+              delay: 4000,
+              disableOnInteraction: true,
+              pauseOnMouseEnter: true,
+            }}
+            loop="true"
+            className="text-white"
+            modules={[Autoplay]}
+          >
+            <SwiperSlide>
+              <Banner bannerMovie={bannerMovie} />
+            </SwiperSlide>
+            <SwiperSlide>
+              <Banner bannerMovie={bannerMovie} />
+            </SwiperSlide>{" "}
+            <SwiperSlide>
+              <Banner bannerMovie={bannerMovie} />
+            </SwiperSlide>{" "}
+            <SwiperSlide>
+              <Banner bannerMovie={bannerMovie} />
+            </SwiperSlide>{" "}
+            <SwiperSlide>
+              <Banner bannerMovie={bannerMovie} />
+            </SwiperSlide>
+          </Swiper>
+          <div className="mt-4 mb-0">
+            <h4 className="ms-4">Trending</h4>
+            <HomepageSlider mode={0} list={movieData} />
+          </div>
+          <div className="mt-4 mb-0">
+            <h4 className="ms-4">Popular Movies</h4>
+            <HomepageSlider mode={0} list={movieData} />
+          </div>
+          <div className="mt-4 mb-0">
+            <h4 className="ms-4">Popular TV shows</h4>
+            <HomepageSlider mode={0} list={movieData} />
+          </div>
+          <div className="mt-4 mb-0">
+            <h4 className="ms-4">Highest Rated Movies</h4>
+            <HomepageSlider mode={0} list={movieData} />
+          </div>
+          <div className="mt-4 mb-0">
+            <h4 className="ms-4">Highest Rated TV shows</h4>
+            <HomepageSlider mode={0} list={movieData} />
+          </div>
         </div>
       </div>
     );

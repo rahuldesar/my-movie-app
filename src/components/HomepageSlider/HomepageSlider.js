@@ -1,52 +1,55 @@
-import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import Carousel from "components/Carousel/Carousel";
-
-import { useWindowDimensions } from "utils/getDimensions";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper";
 
 import SliderCard from "components/SliderCard/SliderCard";
 
-const HomepageSlider = ({ movieList, updateBanner }) => {
-  const [active, setActive] = useState(movieList.results[0]);
+import ROUTES from "constants/routes";
 
-  // * custom hook to read screen size (we only need width)
-  const { width } = useWindowDimensions();
-
-  const moviesForSlider = movieList.results.slice(0, 10);
-  let cardCount;
-
-  // * Count of cards shown in different screen sizes
-  function getCardCounts(width) {
-    switch (true) {
-      case width < 500:
-        return 2;
-      case width < 900:
-        return 3;
-      default:
-        return 8;
-    }
-  }
-
-  cardCount = getCardCounts(width);
-
+//* mode 0 = movie, 1 = tv
+const HomepageSlider = ({ mode, list }) => {
+  const MOVIE_DETAILS = `${ROUTES.DETAIL.BASE}/:movieId`;
+  const TV_DETAILS = `${ROUTES.DETAIL.BASE}/:movieId`;
   return (
-    <div className="slider-wrapper w-100 ">
-      <Carousel cardVisible={cardCount}>
-        {moviesForSlider.map((movie) => (
+    <>
+      <Swiper
+        spaceBetween={15}
+        slidesPerView={8}
+        breakpoints={{
+          320: {
+            slidesPerView: 3,
+          },
+          480: {
+            slidesPerView: 4,
+          },
+          640: {
+            slidesPerView: 6,
+          },
+          800: {
+            slidesPerView: 8,
+          },
+        }}
+        loop="true"
+        className="text-white mx-4"
+        modules={[Autoplay]}
+      >
+        {list.results.map((movie) => (
           // * active toggler handler + banner movie selector
-          <div
-            onClick={() => {
-              setActive(movie);
-              updateBanner(movie.id);
-            }}
-            key={movie.id}
-            className={`${active == movie && "active-card"}`}
-          >
-            <SliderCard movie={movie} />
-          </div>
+          <SwiperSlide key={movie.id}>
+            <Link
+              to={
+                mode === 0
+                  ? MOVIE_DETAILS.replace(":movieId", movie.id)
+                  : TV_DETAILS
+              }
+            >
+              <SliderCard movie={movie} />
+            </Link>
+          </SwiperSlide>
         ))}
-      </Carousel>
-    </div>
+      </Swiper>
+    </>
   );
 };
 export default HomepageSlider;
