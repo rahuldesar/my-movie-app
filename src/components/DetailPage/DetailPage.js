@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable unused-imports/no-unused-vars */
 import { useEffect, useState } from "react";
 
