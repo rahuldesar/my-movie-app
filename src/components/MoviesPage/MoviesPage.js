@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 
 import { PopularMovieContext } from "context/popularMoviesContext";
 
-import PopularMovieAPI from "api/PopularMoviesAPI/PopularMoviesAPI";
+import MoviePopularAPI from "api/MovieAPI/MoviePopularAPI";
 
 import PAGINATION_SETTING from "constants/paginationSettings";
 import API_SETTINGS from "constants/apiSettings";
@@ -30,7 +30,7 @@ const MoviesPage = () => {
       }
     } else {
       setIsLoading(true);
-      PopularMovieAPI.get(currentPage).then((response) => {
+      MoviePopularAPI.get(currentPage).then((response) => {
         setMovieList(response.data.results);
         setIsLoading(false);
       });

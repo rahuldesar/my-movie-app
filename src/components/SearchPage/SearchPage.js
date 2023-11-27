@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 
-import PopularMovieAPI from "api/PopularMoviesAPI/PopularMoviesAPI";
-import MovieQueryAPI from "api/MovieQueryAPI/MovieQueryAPI";
+import MoviePopularAPI from "api/MovieAPI/MoviePopularAPI";
+import MovieQueryAPI from "api/MovieAPI/MovieQueryAPI";
 
 import { PopularMovieContext } from "context/popularMoviesContext";
 
@@ -45,7 +45,7 @@ const SearchPage = () => {
       }
     } else {
       setIsLoading(true);
-      PopularMovieAPI.get(currentPage).then((response) => {
+      MoviePopularAPI.get(currentPage).then((response) => {
         setMovieList(response.data.results);
         setIsLoading(false);
       });

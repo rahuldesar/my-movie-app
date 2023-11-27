@@ -18,7 +18,8 @@ const App = () => (
           <Route path={ROUTES.MOVIES} element={<Movies />} />;
           <Route path={ROUTES.SEARCH.BASE} element={<Search />} />;
           <Route path={ROUTES.SEARCH.BY_QUERY} element={<Search />} />;
-          <Route path={ROUTES.DETAIL.BY_MOVIE_ID} element={<Detail />} />;
+          <Route path={ROUTES.MOVIE_DETAIL.BY_MOVIE_ID} element={<Detail />} />;
+          <Route path={ROUTES.TV_DETAIL.BY_TV_ID} element={<Detail />} />;
         </Routes>
       </div>
     </PopularMoviesProvider>

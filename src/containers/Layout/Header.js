@@ -29,16 +29,8 @@ const Header = () => {
         className="bg-opacity-75 navbar-wrapper navbar-dark w-100 border-bottom border-dark border-opacity-50 d-flex"
       >
         <Container>
-          <Navbar.Toggle
-            aria-controls="navbar-movie"
-            className="px-2 py-1 me-2"
-            data-toggle="collapse"
-          />
-          <Navbar.Brand
-            as={Link}
-            to={ROUTES.HOME}
-            className="text-primary fw-bold me-auto"
-          >
+          <Navbar.Toggle aria-controls="navbar-movie" className="px-2 py-1 me-2" data-toggle="collapse" />
+          <Navbar.Brand as={Link} to={ROUTES.HOME} className="text-primary fw-bold me-auto">
             {t("label.title")}
           </Navbar.Brand>
           <Navbar.Collapse id="navbar-movie" className="order-2 order-lg-1">
@@ -53,14 +45,12 @@ const Header = () => {
           </Navbar.Collapse>
           <div className="order-1 order-lg-2 position-relative">
             <InputGroup size="sm" className="header-searchbox">
-              <Form.Control
-                placeholder="Search"
-                value={searchText}
-                onChange={(e) => setSearchText(e.target.value)}
-              />
-              <Button variant="outline-primary" id="">
-                <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </Button>
+              <Form.Control placeholder="Search" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+              <Link to={`${ROUTES.SEARCH.BASE}/${searchText}`}>
+                <Button variant="outline-primary" id="">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </Button>
+              </Link>
             </InputGroup>
           </div>
         </Container>

@@ -11,7 +11,7 @@ import ROUTES from "constants/routes";
 // * Contains 3 element Image(Movie-Backdrop), Image-Overlay, and Movie-Detail
 const Banner = ({ bannerMovie: currentMovie }) => {
   const { width } = useWindowDimensions();
-  const MOVIE_DETAILS = `${ROUTES.DETAIL.BASE}/${currentMovie.id}`;
+  const MOVIE_DETAILS = `${ROUTES.MOVIE_DETAIL.BASE}/${currentMovie.id}`;
   const BANNER_IMAGE =
     width > 700
       ? `${IMAGE_ROUTES.ORIGINAL}${currentMovie.backdrop_path}`
