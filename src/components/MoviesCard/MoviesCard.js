@@ -6,7 +6,7 @@ import ROUTES from "constants/routes";
 import noImage from "assets/images/no_image.png";
 
 const MoviesCard = ({ movieDetails }) => {
-  const detailRoute = `${ROUTES.DETAIL.BASE}/${movieDetails.id}`;
+  const detailRoute = `${ROUTES.MOVIE_DETAIL.BASE}/${movieDetails.id}`;
   const smallImageRoute = movieDetails.poster_path
     ? `${IMAGE_ROUTES.SMALL}${movieDetails.poster_path}`
     : noImage;

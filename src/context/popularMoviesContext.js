@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 
-import PopularMovieAPI from "api/PopularMoviesAPI/PopularMoviesAPI";
+import MoviePopularAPI from "api/MovieAPI/MoviePopularAPI";
 
 export const PopularMovieContext = createContext();
 
@@ -9,7 +9,7 @@ const PopularMoviesProvider = (props) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    PopularMovieAPI.get().then((response) => {
+    MoviePopularAPI.get().then((response) => {
       setMovieData(response.data);
       setLoading(false);
     });

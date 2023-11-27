@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
 
 import SliderCard from "components/SliderCard/SliderCard";
 
@@ -9,8 +8,8 @@ import ROUTES from "constants/routes";
 
 //* mode 0 = movie, 1 = tv
 const HomepageSlider = ({ mode, list }) => {
-  const MOVIE_DETAILS = `${ROUTES.DETAIL.BASE}/:movieId`;
-  const TV_DETAILS = `${ROUTES.DETAIL.BASE}/:movieId`;
+  const MOVIE_DETAILS = `${ROUTES.MOVIE_DETAIL.BASE}/:movieId`;
+  const TV_DETAILS = `${ROUTES.TV_DETAIL.BASE}/:tvId`;
   return (
     <>
       <Swiper
@@ -31,20 +30,14 @@ const HomepageSlider = ({ mode, list }) => {
           },
         }}
         loop="true"
+        mousewheel="true"
         className="text-white mx-4"
-        modules={[Autoplay]}
       >
-        {list.results.map((movie) => (
+        {list.results.map((item) => (
           // * active toggler handler + banner movie selector
-          <SwiperSlide key={movie.id}>
-            <Link
-              to={
-                mode === 0
-                  ? MOVIE_DETAILS.replace(":movieId", movie.id)
-                  : TV_DETAILS
-              }
-            >
-              <SliderCard movie={movie} />
+          <SwiperSlide key={item.id}>
+            <Link to={mode === 0 ? MOVIE_DETAILS.replace(":movieId", item.id) : TV_DETAILS.replace(":tvId", item.id)}>
+              <SliderCard movie={item} />
             </Link>
           </SwiperSlide>
         ))}
