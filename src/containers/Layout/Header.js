@@ -26,26 +26,26 @@ const Header = () => {
         bg="black"
         expand="lg"
         fixed="top"
-        className="bg-opacity-75 navbar-wrapper navbar-dark w-100 border-bottom border-dark border-opacity-50 d-flex"
+        className=" navbar-wrapper py-1 navbar-dark w-100 border-bottom border-dark border-opacity-50 d-flex"
       >
         <Container>
           <Navbar.Toggle aria-controls="navbar-movie" className="px-2 py-1 me-2" data-toggle="collapse" />
           <Navbar.Brand as={Link} to={ROUTES.HOME} className="text-primary fw-bold me-auto">
             {t("label.title")}
           </Navbar.Brand>
-          <Navbar.Collapse id="navbar-movie" className="order-2 order-lg-1">
+          <Navbar.Collapse id="navbar-movie" className="order-2 order-lg-1 mt-1">
             <Nav className="me-auto ms-lg-3">
-              <NavLink to={ROUTES.HOME} className="nav-link text-white">
-                Home
-              </NavLink>
-              <NavLink to={ROUTES.MOVIES} className="nav-link text-white">
+              <NavLink to={ROUTES.MOVIES} className="nav-link text-white ms-lg-2">
                 Movies
+              </NavLink>
+              <NavLink to={ROUTES.TV} className="nav-link text-white ms-lg-2">
+                Tv
               </NavLink>
             </Nav>
           </Navbar.Collapse>
           <div className="order-1 order-lg-2 position-relative">
             <InputGroup size="sm" className="header-searchbox">
-              <Form.Control placeholder="Search" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
+              <Form.Control size="sm" placeholder="Search" value={searchText} onChange={(e) => setSearchText(e.target.value)} />
               <Link to={`${ROUTES.SEARCH.BASE}/${searchText}`}>
                 <Button variant="outline-primary" id="">
                   <FontAwesomeIcon icon={faMagnifyingGlass} />

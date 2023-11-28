@@ -4,6 +4,7 @@ import ROUTES from "constants/routes";
 
 import Home from "pages/Home";
 import Movies from "pages/Movies";
+import Tv from "pages/Tv";
 import Detail from "pages/Detail";
 import Search from "pages/Search";
 
@@ -12,9 +13,10 @@ import PopularMoviesProvider from "context/popularMoviesContext";
 const App = () => (
   <Router>
     <PopularMoviesProvider>
-      <div className="bg-dark">
+      <div className="d-flex flex-column bg-dark min-vh-100">
         <Routes>
           <Route path={ROUTES.HOME} element={<Home />} />;
+          <Route path={ROUTES.TV} element={<Tv />} />;
           <Route path={ROUTES.MOVIES} element={<Movies />} />;
           <Route path={ROUTES.SEARCH.BASE} element={<Search />} />;
           <Route path={ROUTES.SEARCH.BY_QUERY} element={<Search />} />;

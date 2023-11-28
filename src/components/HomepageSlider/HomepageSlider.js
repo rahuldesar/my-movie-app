@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Navigation } from "swiper/modules";
 
 import SliderCard from "components/SliderCard/SliderCard";
 
@@ -30,8 +31,10 @@ const HomepageSlider = ({ mode, list }) => {
           },
         }}
         loop="true"
-        mousewheel="true"
+        direction={"horizontal"}
+        mousewheel={{ forceToAxis: true }}
         className="text-white mx-4"
+        modules={[Mousewheel, Navigation]}
       >
         {list.results.map((item) => (
           // * active toggler handler + banner movie selector

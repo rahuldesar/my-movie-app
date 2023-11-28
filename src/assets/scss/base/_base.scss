@@ -1,3 +1,11 @@
+:root {
+  --bs-primary-rgb: 166, 227, 161;
+  --bs-dark-rgb: 30, 30, 46;
+  --bs-black-rgb: 24, 24, 37;
+  --bs-btn-bg: 166, 227, 161;
+
+}
+
 h4 {
   font-family: $anton-pro-font-family;
 }
@@ -8,6 +16,10 @@ ul {
 
 p {
   font-family: $roboto-condensed-font-family;
+}
+
+.text-sm {
+  font-size: 0.875rem;
 }
 
 

@@ -34,6 +34,7 @@ const PaginationMovie = ({ currentPage, handlePageChange }) => {
   return (
     <Pagination>
       <Pagination.Prev
+      className="text-dark"
         disabled={currentPage === 1}
         onClick={() => handlePageChange(currentPage - 1)}
       />

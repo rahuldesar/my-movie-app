@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import MovieDetailAPI from "api/MovieAPI/MovieDetailsAPI";
 
 import { PopularMovieContext } from "context/popularMoviesContext";
 
-import Banner from "components/Banner/Banner";
 import HomepageSlider from "components/HomepageSlider/HomepageSlider";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import TvPopularAPI from "api/TvAPI/TvPopularAPI";
@@ -14,10 +12,12 @@ import MovieHighestRatedAPI from "api/MovieAPI/MovieHighestRatedAPI";
 import TvHighestRatedAPI from "api/TvAPI/TvHighestRatedAPI";
 import MovieTrendingAPI from "api/MovieAPI/MovieTrendingAPI";
 import TvTrendingAPI from "api/TvAPI/TvTrendingAPI";
+import Banner from "components/Banner/Banner";
 
 const Homepage = () => {
   const [bannerMovie, setBannerMovie] = useState([]);
   const [isBannerLoading, setIsBannerLoading] = useState(true);
+
   const [isLoading, setIsLoading] = useState(true);
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [popularTv, setPopularTv] = useState([]);
@@ -94,7 +94,8 @@ const Homepage = () => {
     return (
       <div>
         <div className="homepage-wrapper position-relative w-100">
-          <Swiper
+          <Banner bannerMovie={bannerMovie} />
+          {/* <Swiper
             slidesPerView={1}
             autoplay={{
               delay: 4000,
@@ -110,7 +111,7 @@ const Homepage = () => {
             <SwiperSlide>
               <Banner bannerMovie={bannerMovie} />
             </SwiperSlide>
-          </Swiper>
+          </Swiper> */}
 
           <div className="mt-4 mb-0">
             <h4 className="ms-4">Trending Movies</h4>

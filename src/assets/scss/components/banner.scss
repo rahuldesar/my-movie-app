@@ -14,11 +14,11 @@
   }
 
   @include min-break-point(tablet-landscape) {
-    height: 25.75rem;
-  }
-  @include min-break-point(larger-desktop) {
     height: 30.75rem;
   }
+  // @include min-break-point(larger-desktop) {
+  //   height: 32.75rem;
+  // }
 
   // * ==== gradient overlay over banner image ===
   .dark-overlay {

@@ -2,7 +2,7 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { useEffect, useState } from "react";
 
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 
 import MovieCreditAPI from "api/MovieAPI/MovieCreditAPI";
 import MovieDetailAPI from "api/MovieAPI/MovieDetailsAPI";
@@ -10,9 +10,10 @@ import MovieDetailAPI from "api/MovieAPI/MovieDetailsAPI";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import TvDetailAPI from "api/TvAPI/TvDetailsAPI";
 import TvCreditAPI from "api/TvAPI/TvCreditAPI";
+import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const MovieDetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
-  console.log(currentMovieDetail);
   const getDirector = () => {
     if (currentMovieCredit.crew) {
       return currentMovieCredit.crew.find((crewItem) => crewItem.job === "Director");
@@ -41,12 +42,12 @@ const MovieDetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
           <iframe
             src={`https://www.2embed.cc/embed/${currentMovieDetail.imdb_id}`}
             width="100%"
-            allowFullScreen="true"
+            allowFullScreen={true}
           ></iframe>
           {/* <VideoPlayer /> */}
         </div>
       </div>
-      <div className="w-75 m-auto pt-3 pb-5">
+      <div className="container text-sm m-auto pt-3 pb-5">
         <h4 className="mt-2 text-primary"> {currentMovieDetail.title} </h4>
         <div>{currentMovieDetail.overview}</div>
         <div className="d-flex flex-column flex-sm-row pt-4 gap-lg-5 gap-2 justify-content-between">
@@ -75,7 +76,7 @@ const MovieDetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
               {directorInfo ? directorInfo.name : "DIRECTOR INFORMATION MISSING"}
             </div>
           </div>
-          <div className="d-flex flex-column gap-2">
+          <div className="d-flex flex-column gap-2 me-lg-5">
             <div>
               <span className="fw-bold">Duration : </span>
               {currentMovieDetail.runtime} mins
@@ -96,16 +97,105 @@ const MovieDetailContent = ({ currentMovieCredit, currentMovieDetail }) => {
 };
 
 const TvDetailContent = ({ currentTvCredit, currentTvDetail }) => {
-  console.log(currentTvDetail);
+  const [searchParams] = useSearchParams();
+  const season = parseInt(searchParams.get("season") || 1);
+  const episode = parseInt(searchParams.get("episode") || 1);
+  const [currentSeason, setCurrentSeason] = useState(season);
+  const [currentEpisode, setCurrentEpisode] = useState(episode);
+  const movieId = currentTvDetail.id;
+  const totalSeasons = currentTvDetail.number_of_seasons;
+  const totalEpisodeCurrentSeason = currentTvDetail.seasons[currentSeason].episode_count;
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (season) {
+      setCurrentSeason(parseInt(season));
+    }
+    if (episode) {
+      setCurrentEpisode(parseInt(episode));
+    }
+  }, [season, episode]);
+
+  const updateCurrentSeason = (seasonNumber) => {
+    setCurrentSeason(seasonNumber);
+  };
+
+  const updateCurrentEpisode = (episodeNumber) => {
+    setCurrentEpisode(episodeNumber);
+  };
+
+  useEffect(() => {
+    navigate(`/series/detail/${movieId}?season=${currentSeason}&episode=${currentEpisode}`);
+  }, [currentSeason, currentEpisode]);
+
+  const SeasonList = ({ totalSeasons, currentSeason, updateCurrentSeason }) => {
+    const buttons = [];
+    for (let i = 0; i < totalSeasons; i++) {
+      if (currentSeason == i + 1) {
+        buttons.push(
+          <Button variant="dark active" key={`button-season-${i + 1}`} onClick={() => updateCurrentSeason(i + 1)}>
+            {i + 1}
+          </Button>
+        );
+      } else
+        buttons.push(
+          <Button variant="dark" key={`button-season-${i + 1}`} onClick={() => updateCurrentSeason(i + 1)}>
+            {i + 1}
+          </Button>
+        );
+    }
+    return <div>{buttons}</div>;
+  };
+
+  const EpisodeList = ({ totalEpisodeCurrentSeason, currentEpisode, updateCurrentEpisode }) => {
+    const buttons = [];
+    for (let i = 0; i < totalEpisodeCurrentSeason; i++) {
+      if (currentEpisode == i + 1) {
+        buttons.push(
+          <Button variant="dark active" key={`button-episode-${i + 1}`} onClick={() => updateCurrentEpisode(i + 1)}>
+            {i + 1}
+          </Button>
+        );
+      } else
+        buttons.push(
+          <Button variant="dark" key={`button-episode-${i + 1}`} onClick={() => updateCurrentEpisode(i + 1)}>
+            {i + 1}
+          </Button>
+        );
+    }
+    return <div>{buttons}</div>;
+  };
 
   return (
-    <div className="px-4">
-      <div className="mt-4 bg-dark responsive-iframe">
-        <iframe
-          // src = {`https://www.2embed.cc/embedtv/{IMDB-ID}or{TMDB-ID}&s={seasonNumber}&e={episodeNumber}`}
-          // src={`https://www.2embed.cc/embed/imdb/movie?id=${1}`}
-          allowFullScreen="true"
-        ></iframe>
+    <div className="text-light pt-5 ">
+      <div className="px-4 mt-4">
+        <div className="bg-dark responsive-iframe">
+          <iframe
+            src={`https://www.2embed.cc/embedtv/${movieId}&s=${currentSeason}&e=${currentEpisode}`}
+            width="100%"
+            allowFullScreen={true}
+          ></iframe>
+          {/* <VideoPlayer /> */}
+        </div>
+      </div>
+      <div className="container text-sm m-auto pt-3 pb-5">
+        <div>
+          seasons
+          <SeasonList
+            totalSeasons={totalSeasons}
+            currentSeason={currentSeason}
+            updateCurrentSeason={updateCurrentSeason}
+          />
+        </div>
+
+        <div>
+          Episodes
+          <EpisodeList
+            totalEpisodeCurrentSeason={totalEpisodeCurrentSeason}
+            currentEpisode={currentEpisode}
+            updateCurrentEpisode={updateCurrentEpisode}
+          />
+        </div>
       </div>
     </div>
   );

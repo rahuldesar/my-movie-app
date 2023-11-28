@@ -1,6 +1,7 @@
 const ROUTES = {
   HOME: "/",
   MOVIES: "/movies",
+  TV: "/tv",
   MOVIE_DETAIL: {
     BASE: "/movie/detail",
     BY_MOVIE_ID: "/movie/detail/:movieId",

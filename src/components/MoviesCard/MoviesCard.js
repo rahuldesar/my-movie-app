@@ -4,17 +4,21 @@ import IMAGE_ROUTES from "constants/imageRoutes";
 import ROUTES from "constants/routes";
 
 import noImage from "assets/images/no_image.png";
+import { Badge } from "react-bootstrap";
 
 const MoviesCard = ({ movieDetails }) => {
   const detailRoute = `${ROUTES.MOVIE_DETAIL.BASE}/${movieDetails.id}`;
   const smallImageRoute = movieDetails.poster_path
     ? `${IMAGE_ROUTES.SMALL}${movieDetails.poster_path}`
     : noImage;
+  const rating = movieDetails.vote_average.toFixed(1);
 
   return (
     <div className="movie-card-wrapper py-2">
       <Link to={detailRoute} className="text-decoration-none">
-        <div className="movie-card">
+        <div className="movie-card position-relative">
+
+        <Badge bg="secondary"  className="position-absolute rating-pill-detail-page">{rating}</Badge>
           <div className="border border-4 border-light rounded m-2">
             <img
               src={smallImageRoute}
