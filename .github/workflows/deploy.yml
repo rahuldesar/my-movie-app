@@ -24,6 +24,7 @@ jobs:
       - name: Build Application
         run: |
           npm install --legacy-peer-deps
+          export
           npm run build
           echo "movies.rahuldeshar.com.np" > ./build/CNAME
         env:
