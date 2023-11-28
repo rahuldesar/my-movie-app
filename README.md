@@ -2,4 +2,4 @@
 
 ### CURRENTY DEPLOYED AT
 
-- https://lustrous-cranachan-916112.netlify.app/
+- https://movies.rahuldeshar.com.np
