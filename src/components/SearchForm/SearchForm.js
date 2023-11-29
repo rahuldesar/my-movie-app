@@ -4,18 +4,12 @@ import { Link, useParams } from "react-router-dom";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
 
-import FILTER_OPTIONS from "constants/filterOptions";
 import ROUTES from "constants/routes";
 
-const SearchForm = ({
-  movieList,
-  updateFilteredMovieList,
-  filteredMovieList,
-}) => {
+const SearchForm = ({ movieList, updateFilteredMovieList, filteredMovieList }) => {
   const { query } = useParams();
-  const [searchMovie, setSearchMovie] = useState(query ? query : "");
+  const [search, setSearch] = useState(query ? query : "");
   const [genre, setGenre] = useState("");
   const [year, setYear] = useState("");
   const [orderBy, setOrderBy] = useState("");
@@ -25,7 +19,7 @@ const SearchForm = ({
     updateFilteredMovieList(allFilter(movieList, genre, year, orderBy));
   }, [filteredMovieList, genre, year, orderBy, movieList]);
 
-  const MOVIE_SEARCH_URL = `${ROUTES.SEARCH.BASE}/${searchMovie}`;
+  const MOVIE_SEARCH_URL = `${ROUTES.SEARCH.BASE}/${search}`;
 
   function filterByGenre(arr, genre) {
     if (genre === "") {
@@ -77,23 +71,20 @@ const SearchForm = ({
                     type="text"
                     className="form-control"
                     placeholder="Search Any Movie"
-                    value={searchMovie}
+                    value={search}
                     aria-label="Movie"
                     aria-describedby="input-group-button-right"
-                    onChange={(e) => setSearchMovie(e.target.value)}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
                   <Link to={MOVIE_SEARCH_URL}>
-                    <button
-                      className="btn btn-primary"
-                      id="input-group-button-right"
-                    >
+                    <button className="btn btn-primary" id="input-group-button-right">
                       Search
                     </button>
                   </Link>
                 </div>
               </div>
             </Row>
-            <Row className="pt-2 gap-2">
+            {/* <Row className="pt-2 gap-2">
               <Col xs={12} md>
                 <div>
                   <label> Genre : </label>
@@ -145,7 +136,7 @@ const SearchForm = ({
                   ))}
                 </select>
               </Col>
-            </Row>
+            </Row> */}
           </form>
         </Container>
       </div>

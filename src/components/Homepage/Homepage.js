@@ -3,11 +3,10 @@ import { useContext, useEffect, useState } from "react";
 import MovieDetailAPI from "api/MovieAPI/MovieDetailsAPI";
 
 import { PopularMovieContext } from "context/popularMoviesContext";
+import { PopularTvContext } from "context/popularTvContext";
 
 import HomepageSlider from "components/HomepageSlider/HomepageSlider";
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
-import TvPopularAPI from "api/TvAPI/TvPopularAPI";
-import MoviePopularAPI from "api/MovieAPI/MoviePopularAPI";
 import MovieHighestRatedAPI from "api/MovieAPI/MovieHighestRatedAPI";
 import TvHighestRatedAPI from "api/TvAPI/TvHighestRatedAPI";
 import MovieTrendingAPI from "api/MovieAPI/MovieTrendingAPI";
@@ -15,26 +14,32 @@ import TvTrendingAPI from "api/TvAPI/TvTrendingAPI";
 import Banner from "components/Banner/Banner";
 
 const Homepage = () => {
+  const [popularTv, setPopularTv] = useState([]);
+  const [popularMovies, setPopularMovies] = useState([]);
+
+  const [selectedMovie, setSelectedMovie] = useState(null);
   const [bannerMovie, setBannerMovie] = useState([]);
   const [isBannerLoading, setIsBannerLoading] = useState(true);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedMovie, setSelectedMovie] = useState(null);
-  const [popularTv, setPopularTv] = useState([]);
-  const [highestRatedMovies, setHighestRatedMovies] = useState([]);
   const [trendingMovies, setTrendingMovies] = useState([]);
   const [trendingTv, setTrendingTv] = useState([]);
-  const [popularMovies, setPopularMovies] = useState([]);
+  const [highestRatedMovies, setHighestRatedMovies] = useState([]);
   const [highestRatedTv, setHighestRatedTv] = useState([]);
 
-  const { movieData } = useContext(PopularMovieContext);
+  const { movieData, loading: isMovieContextLoading } = useContext(PopularMovieContext);
+  const { tvData, loading: isTvContextLoading } = useContext(PopularTvContext);
+
+  const isContextLoading = isMovieContextLoading || isTvContextLoading;
 
   // * Sets Default banner to first of MovieData array.
   useEffect(() => {
-    if (movieData.results) {
+    if (!isContextLoading) {
+      setPopularMovies(movieData);
       setSelectedMovie(movieData.results[0].id);
+      setPopularTv(tvData);
     }
-  }, [movieData]);
+  }, [isContextLoading]);
 
   // * Fetches data for banner selected from slider.
   useEffect(() => {
@@ -48,15 +53,16 @@ const Homepage = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    const fetchPopularTv = async () => {
-      const response = await TvPopularAPI.get();
-      setPopularTv(response.data);
-    };
+    // --- These come from context ----
+    // const fetchPopularTv = async () => {
+    //   const response = await TvPopularAPI.get();
+    //   setPopularTv(response.data);
+    // };
 
-    const fetchPopularMovies = async () => {
-      const response = await MoviePopularAPI.get();
-      setPopularMovies(response.data);
-    };
+    // const fetchPopularMovies = async () => {
+    //   const response = await MoviePopularAPI.get();
+    //   setPopularMovies(response.data);
+    // };
 
     const fetchHighestRatedTv = async () => {
       const response = await TvHighestRatedAPI.get();
@@ -79,8 +85,8 @@ const Homepage = () => {
     };
 
     Promise.all([
-      fetchPopularTv(),
-      fetchPopularMovies(),
+      // fetchPopularTv(),
+      // fetchPopularMovies(),
       fetchHighestRatedTv(),
       fetchHighestRatedMovies(),
       fetchTrendingMovies(),
@@ -90,7 +96,7 @@ const Homepage = () => {
     });
   }, []);
 
-  if (!isBannerLoading && !isLoading) {
+  if (!isBannerLoading && !isLoading && !isContextLoading) {
     return (
       <div>
         <div className="homepage-wrapper position-relative w-100">

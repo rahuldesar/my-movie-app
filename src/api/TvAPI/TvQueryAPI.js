@@ -5,7 +5,7 @@ import API_SETTINGS from "constants/apiSettings";
 const apiKey = process.env.REACT_APP_API_KEY;
 
 const URL = {
-  INDEX: `search/movie?api_key=${apiKey}&language=en-US&query=:movie_name&page=:page_no`,
+  INDEX: `search/tv?api_key=${apiKey}&language=en-US&query=:movie_name&page=:page_no`,
 };
 
 class TvQueryAPI {

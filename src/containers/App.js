@@ -9,21 +9,24 @@ import Detail from "pages/Detail";
 import Search from "pages/Search";
 
 import PopularMoviesProvider from "context/popularMoviesContext";
+import PopularTvProvider from "context/popularTvContext";
 
 const App = () => (
   <Router>
     <PopularMoviesProvider>
-      <div className="d-flex flex-column bg-dark min-vh-100">
-        <Routes>
-          <Route path={ROUTES.HOME} element={<Home />} />;
-          <Route path={ROUTES.TV} element={<Tv />} />;
-          <Route path={ROUTES.MOVIES} element={<Movies />} />;
-          <Route path={ROUTES.SEARCH.BASE} element={<Search />} />;
-          <Route path={ROUTES.SEARCH.BY_QUERY} element={<Search />} />;
-          <Route path={ROUTES.MOVIE_DETAIL.BY_MOVIE_ID} element={<Detail />} />;
-          <Route path={ROUTES.TV_DETAIL.BY_TV_ID} element={<Detail />} />;
-        </Routes>
-      </div>
+      <PopularTvProvider>
+        <div className="d-flex flex-column bg-dark min-vh-100">
+          <Routes>
+            <Route path={ROUTES.HOME} element={<Home />} />;
+            <Route path={ROUTES.TV} element={<Tv />} />;
+            <Route path={ROUTES.MOVIES} element={<Movies />} />;
+            <Route path={ROUTES.SEARCH.BASE} element={<Search />} />;
+            <Route path={ROUTES.SEARCH.BY_QUERY} element={<Search />} />;
+            <Route path={ROUTES.MOVIE_DETAIL.BY_MOVIE_ID} element={<Detail />} />;
+            <Route path={ROUTES.TV_DETAIL.BY_TV_ID} element={<Detail />} />;
+          </Routes>
+        </div>
+      </PopularTvProvider>
     </PopularMoviesProvider>
   </Router>
 );

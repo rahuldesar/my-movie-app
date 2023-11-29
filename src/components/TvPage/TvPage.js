@@ -1,37 +1,45 @@
 import { useContext, useEffect, useState } from "react";
 
-import { PopularMovieContext } from "context/popularMoviesContext";
-
-import MoviePopularAPI from "api/MovieAPI/MoviePopularAPI";
+import { PopularTvContext } from "context/popularTvContext";
 
 import PAGINATION_SETTING from "constants/paginationSettings";
 import API_SETTINGS from "constants/apiSettings";
 
 import LoadingSpinner from "components/LoadingSpinner/LoadingSpinner";
 import MovieListViewer from "components/MovieListViewer/MovieListViewer";
+import TvPopularAPI from "api/TvAPI/TvPopularAPI";
 
 const TvPage = () => {
-  const [movieList, setMovieList] = useState([]);
+  const [tvList, setTvList] = useState([]);
   const [currentPage, setCurrentPage] = useState(PAGINATION_SETTING.START);
-  const { movieData } = useContext(PopularMovieContext);
+  const { tvData } = useContext(PopularTvContext);
   const [isLoading, setIsLoading] = useState(true);
 
+  function prepareTv(tvShows) {
+    tvShows.forEach((tv) => {
+      tv.type = "tv";
+    });
+  }
   // * Updates data from context or api with pagination query.
   useEffect(() => {
     updateNonSearchData();
-  }, [movieData, currentPage]);
+  }, [tvData, currentPage]);
 
   // * Get Popular Movie Data from context or API call for new page.
   function updateNonSearchData() {
     if (currentPage == API_SETTINGS.DEFAULT_PAGE) {
-      if (movieData.results) {
-        setMovieList(movieData.results);
+      if (tvData.results) {
+        let updatedList = tvData.results;
+        prepareTv(updatedList);
+        setTvList(updatedList);
         setIsLoading(false);
       }
     } else {
       setIsLoading(true);
-      MoviePopularAPI.get(currentPage).then((response) => {
-        setMovieList(response.data.results);
+      TvPopularAPI.get(currentPage).then((response) => {
+        let updatedList = response.data.results;
+        prepareTv(updatedList);
+        setTvList(updatedList);
         setIsLoading(false);
       });
     }
@@ -44,15 +52,10 @@ const TvPage = () => {
   } else {
     return (
       <div className="pt-5">
-        <MovieListViewer
-          movieList={movieList}
-          currentPage={currentPage}
-          updatePage={updatePage}
-        />
+        <MovieListViewer movieList={tvList} currentPage={currentPage} updatePage={updatePage} />
       </div>
     );
   }
 };
 
 export default TvPage;
-
