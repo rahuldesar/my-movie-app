@@ -118,7 +118,7 @@ const SearchPage = () => {
   const updatePage = (newPageNo) => setCurrentPage(newPageNo);
 
   // TODO : Update accordingly - currently only shows the mergedlist
-  const updateFilteredMovieList = (updatedList) => {
+  const updateFilteredMovieList = (_updatedList) => {
     setFilteredMovieList(mergedList);
   };
 
